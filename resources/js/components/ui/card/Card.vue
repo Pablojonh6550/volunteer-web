@@ -2,13 +2,16 @@
 import type { HTMLAttributes } from "vue"
 import { cn } from "@/lib/utils"
 
-const props = defineProps<{
+// `as` permite escolher a tag semântica (ex.: article, h1, h2).
+const props = withDefaults(defineProps<{
   class?: HTMLAttributes["class"]
-}>()
+  as?: string
+}>(), { as: "div" })
 </script>
 
 <template>
-  <div
+  <component
+    :is="props.as"
     data-slot="card"
     :class="
       cn(
@@ -18,5 +21,5 @@ const props = defineProps<{
     "
   >
     <slot />
-  </div>
+  </component>
 </template>

@@ -1,33 +1,27 @@
-import type { Auth } from '@/types/auth';
+import 'vue-router';
+import type { UserType } from './enums';
 
-// Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
     interface ImportMetaEnv {
         readonly VITE_APP_NAME: string;
         [key: string]: string | boolean | undefined;
     }
-
-    interface ImportMeta {
-        readonly env: ImportMetaEnv;
-        readonly glob: <T>(pattern: string) => Record<string, () => Promise<T>>;
-    }
 }
 
-declare module '@inertiajs/core' {
-    export interface InertiaConfig {
-        sharedPageProps: {
-            name: string;
-            auth: Auth;
-            sidebarOpen: boolean;
-            [key: string]: unknown;
-        };
-    }
-}
-
-declare module 'vue' {
-    interface ComponentCustomProperties {
-        $inertia: typeof Router;
-        $page: Page;
-        $headManager: ReturnType<typeof createHeadManager>;
+/**
+ * Metadados das rotas usados pelos guards (router/guards.ts) e pelo layout.
+ */
+declare module 'vue-router' {
+    interface RouteMeta {
+        /** Título da página (document.title e anúncio para leitores de tela). */
+        title?: string;
+        /** Exige usuário autenticado. */
+        requiresAuth?: boolean;
+        /** Somente visitantes (ex.: login). */
+        guestOnly?: boolean;
+        /** Restringe a um perfil. */
+        role?: UserType;
+        /** Layout a ser usado: public (padrão), auth ou app. */
+        layout?: 'public' | 'auth' | 'app';
     }
 }

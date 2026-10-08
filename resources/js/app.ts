@@ -1,33 +1,24 @@
-import { createInertiaApp } from '@inertiajs/vue3';
+/**
+ * Ponto de entrada do SPA Vue 3.
+ *
+ * Vue 3 (Composition API) + Vue Router + Pinia, consumindo a API Laravel.
+ */
+import { createPinia } from 'pinia';
+import { createApp } from 'vue';
+import App from '@/App.vue';
 import { initializeTheme } from '@/composables/useAppearance';
-import AppLayout from '@/layouts/AppLayout.vue';
-import AuthLayout from '@/layouts/AuthLayout.vue';
-import SettingsLayout from '@/layouts/settings/Layout.vue';
-import { initializeFlashToast } from '@/lib/flashToast';
+import { createAppRouter } from '@/router';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-
-void createInertiaApp({
-    title: (title) => (title ? `${title} - ${appName}` : appName),
-    layout: (name) => {
-        switch (true) {
-            case name === 'Welcome':
-                return null;
-            case name.startsWith('auth/'):
-                return AuthLayout;
-            case name.startsWith('settings/'):
-                return [AppLayout, SettingsLayout];
-            default:
-                return AppLayout;
-        }
-    },
-    progress: {
-        color: '#4B5563',
-    },
-});
-
-// This will set light / dark mode on page load...
 initializeTheme();
 
-// This will listen for flash toast data from the server...
-initializeFlashToast();
+const app = createApp(App);
+
+app.use(createPinia());
+app.use(createAppRouter());
+
+// Erros não tratados: registra no console sem vazar para o usuário.
+app.config.errorHandler = (error, _instance, info) => {
+    console.error('[app]', info, error);
+};
+
+app.mount('#app');
