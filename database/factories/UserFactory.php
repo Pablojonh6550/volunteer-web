@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserType;
+use App\Models\Organization;
 use App\Models\User;
+use App\Models\Volunteer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -29,10 +32,9 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'type' => UserType::Volunteer,
+            'phone' => fake()->numerify('119########'),
             'remember_token' => Str::random(10),
-            'two_factor_secret' => null,
-            'two_factor_recovery_codes' => null,
-            'two_factor_confirmed_at' => null,
         ];
     }
 
@@ -47,14 +49,24 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the model has two-factor authentication configured.
+     * Usuário do tipo ONG, já com o perfil institucional criado.
      */
-    public function withTwoFactor(): static
+    public function organization(): static
     {
-        return $this->state(fn (array $attributes) => [
-            'two_factor_secret' => encrypt('secret'),
-            'two_factor_recovery_codes' => encrypt(json_encode(['recovery-code-1'])),
-            'two_factor_confirmed_at' => now(),
-        ]);
+        return $this->state(fn () => ['type' => UserType::Organization, 'name' => OrganizationFactory::fakeName()])
+            ->afterCreating(function (User $user) {
+                Organization::factory()->for($user)->create(['name' => $user->name]);
+            });
+    }
+
+    /**
+     * Usuário do tipo voluntário, já com o perfil pessoal criado.
+     */
+    public function volunteer(): static
+    {
+        return $this->state(['type' => UserType::Volunteer])
+            ->afterCreating(function (User $user) {
+                Volunteer::factory()->for($user)->create();
+            });
     }
 }
