@@ -1,9 +1,16 @@
+import type { Component } from 'vue';
+import type { RouteLocationRaw } from 'vue-router';
+
 export type Appearance = 'light' | 'dark' | 'system';
 export type ResolvedAppearance = 'light' | 'dark';
 
-export type AppVariant = 'header' | 'sidebar';
+export interface NavItem {
+    title: string;
+    to: RouteLocationRaw;
+    icon?: Component;
+}
 
-export type FlashToast = {
-    type: 'success' | 'info' | 'warning' | 'error';
-    message: string;
-};
+export interface SelectOption<T = string> {
+    value: T;
+    label: string;
+}

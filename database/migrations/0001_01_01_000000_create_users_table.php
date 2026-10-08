@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            // Perfil do usuário: organization (ONG) ou volunteer (App\Enums\UserType).
+            $table->string('type', 20)->index();
+            $table->string('phone', 20)->nullable();
+            // Caminho relativo no disco "public" (ver AvatarController).
+            $table->string('avatar')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

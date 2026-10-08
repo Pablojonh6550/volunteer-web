@@ -28,6 +28,8 @@
 
     --color-primary: var(--primary);
     --color-primary-foreground: var(--primary-foreground);
+    /* Tom forte da marca para texto, bordas e foco: o lilás puro não tem contraste sobre fundo claro. */
+    --color-primary-strong: var(--primary-strong);
 
     --color-secondary: var(--secondary);
     --color-secondary-foreground: var(--secondary-foreground);
@@ -96,8 +98,10 @@
     --card-foreground: hsl(0 0% 3.9%);
     --popover: hsl(0 0% 100%);
     --popover-foreground: hsl(0 0% 3.9%);
-    --primary: hsl(0 0% 9%);
-    --primary-foreground: hsl(0 0% 98%);
+    /* Lilás da marca (#e4c1f9) com texto roxo-escuro (contraste 10.3:1). */
+    --primary: #e4c1f9;
+    --primary-foreground: #2e1440;
+    --primary-strong: #7b3fa8;
     --secondary: hsl(0 0% 92.1%);
     --secondary-foreground: hsl(0 0% 9%);
     --muted: hsl(0 0% 96.1%);
@@ -108,7 +112,7 @@
     --destructive-foreground: hsl(0 0% 98%);
     --border: hsl(0 0% 92.8%);
     --input: hsl(0 0% 89.8%);
-    --ring: hsl(0 0% 3.9%);
+    --ring: #7b3fa8;
     --chart-1: hsl(12 76% 61%);
     --chart-2: hsl(173 58% 39%);
     --chart-3: hsl(197 37% 24%);
@@ -117,12 +121,12 @@
     --radius: 0.5rem;
     --sidebar-background: hsl(0 0% 98%);
     --sidebar-foreground: hsl(240 5.3% 26.1%);
-    --sidebar-primary: hsl(0 0% 10%);
-    --sidebar-primary-foreground: hsl(0 0% 98%);
+    --sidebar-primary: #e4c1f9;
+    --sidebar-primary-foreground: #2e1440;
     --sidebar-accent: hsl(0 0% 94%);
     --sidebar-accent-foreground: hsl(0 0% 30%);
     --sidebar-border: hsl(0 0% 91%);
-    --sidebar-ring: hsl(217.2 91.2% 59.8%);
+    --sidebar-ring: #7b3fa8;
     --sidebar: hsl(0 0% 98%);
 }
 
@@ -133,8 +137,9 @@
     --card-foreground: hsl(0 0% 98%);
     --popover: hsl(0 0% 3.9%);
     --popover-foreground: hsl(0 0% 98%);
-    --primary: hsl(0 0% 98%);
-    --primary-foreground: hsl(0 0% 9%);
+    --primary: #e4c1f9;
+    --primary-foreground: #2e1440;
+    --primary-strong: #e4c1f9;
     --secondary: hsl(0 0% 14.9%);
     --secondary-foreground: hsl(0 0% 98%);
     --muted: hsl(0 0% 16.08%);
@@ -145,7 +150,7 @@
     --destructive-foreground: hsl(0 0% 98%);
     --border: hsl(0 0% 14.9%);
     --input: hsl(0 0% 14.9%);
-    --ring: hsl(0 0% 83.1%);
+    --ring: #e4c1f9;
     --chart-1: hsl(220 70% 50%);
     --chart-2: hsl(160 60% 45%);
     --chart-3: hsl(30 80% 55%);
@@ -153,12 +158,12 @@
     --chart-5: hsl(340 75% 55%);
     --sidebar-background: hsl(0 0% 7%);
     --sidebar-foreground: hsl(0 0% 95.9%);
-    --sidebar-primary: hsl(360, 100%, 100%);
-    --sidebar-primary-foreground: hsl(0 0% 100%);
+    --sidebar-primary: #e4c1f9;
+    --sidebar-primary-foreground: #2e1440;
     --sidebar-accent: hsl(0 0% 15.9%);
     --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
     --sidebar-border: hsl(0 0% 15.9%);
-    --sidebar-ring: hsl(217.2 91.2% 59.8%);
+    --sidebar-ring: #e4c1f9;
     --sidebar: hsl(240 5.9% 10%);
 }
 
@@ -168,5 +173,65 @@
     }
     body {
         @apply bg-background text-foreground;
+    }
+}
+
+/* ------------------------------------------------------------------
+ * Mapa (Leaflet) — marcadores e popups do design system
+ * ------------------------------------------------------------------ */
+.map-pin span {
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.35);
+    background: var(--primary);
+}
+
+.map-pin--request span {
+    background: oklch(0.65 0.19 45);
+}
+
+.map-pin--user span {
+    border-radius: 50%;
+    transform: none;
+    background: oklch(0.6 0.2 250);
+}
+
+.leaflet-marker-icon:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+}
+
+.map-popup {
+    display: grid;
+    gap: 0.25rem;
+    font-family: inherit;
+}
+
+.map-popup p {
+    margin: 0 !important;
+    color: #555;
+}
+
+.map-popup button {
+    justify-self: start;
+    margin-top: 0.25rem;
+    color: var(--primary-strong);
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Respeita usuários que preferem menos animação. */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
