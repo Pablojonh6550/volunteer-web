@@ -35,7 +35,7 @@ const types = [
     >
         <div class="space-y-6">
             <p
-                class="text-primary flex items-center gap-2 text-sm font-medium"
+                class="text-primary-strong flex items-center gap-2 text-sm font-medium"
             >
                 <MapPinIcon class="size-4" aria-hidden="true" /> Ajuda perto de
                 você
@@ -87,7 +87,7 @@ const types = [
             >
                 <component
                     :is="item.icon"
-                    class="text-primary size-6 shrink-0"
+                    class="text-primary-strong size-6 shrink-0"
                     aria-hidden="true"
                 />
                 <div>

@@ -128,7 +128,7 @@ async function review(
                             </p>
                             <blockquote
                                 v-if="p.message"
-                                class="border-primary/40 text-muted-foreground mt-1 border-l-2 pl-3 text-sm italic"
+                                class="border-primary-strong/40 text-muted-foreground mt-1 border-l-2 pl-3 text-sm italic"
                             >
                                 “{{ p.message }}”
                             </blockquote>

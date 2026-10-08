@@ -15,7 +15,7 @@ defineProps<{
         <CardContent class="flex items-center gap-4 p-5">
             <div
                 v-if="icon"
-                class="bg-primary/10 text-primary rounded-lg p-2.5"
+                class="bg-primary/10 text-primary-strong rounded-lg p-2.5"
             >
                 <component :is="icon" class="size-5" aria-hidden="true" />
             </div>

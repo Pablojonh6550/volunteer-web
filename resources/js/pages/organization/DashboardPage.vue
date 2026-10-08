@@ -55,7 +55,7 @@ const s = computed(() => stats.data.value);
             organização no mapa.
             <RouterLink
                 :to="{ name: 'organization.profile' }"
-                class="text-primary font-medium underline"
+                class="text-primary-strong font-medium underline"
                 >Completar perfil</RouterLink
             >
         </AlertDescription>

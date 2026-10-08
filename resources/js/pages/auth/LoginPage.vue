@@ -79,7 +79,7 @@ const submit = () => form.submit(() => login({ ...form.data }));
                     Ainda não tem conta?
                     <RouterLink
                         :to="{ name: 'register' }"
-                        class="text-primary underline-offset-4 hover:underline"
+                        class="text-primary-strong underline-offset-4 hover:underline"
                         >Cadastre-se</RouterLink
                     >
                 </p>

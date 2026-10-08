@@ -75,7 +75,7 @@ const submit = () =>
                                 cn(
                                     'has-focus-visible:ring-ring/50 flex cursor-pointer items-center gap-2 rounded-lg border p-3 text-sm has-focus-visible:ring-[3px]',
                                     form.data.type === profile.value &&
-                                        'border-primary bg-primary/5',
+                                        'border-primary-strong bg-primary/5',
                                 )
                             "
                         >
@@ -190,7 +190,7 @@ const submit = () =>
                         <input
                             v-model="form.data.terms"
                             type="checkbox"
-                            class="accent-primary mt-0.5 size-4"
+                            class="accent-primary-strong mt-0.5 size-4"
                             :aria-invalid="form.errors.terms ? true : undefined"
                         />
                         <span
@@ -211,7 +211,7 @@ const submit = () =>
                     Já tem conta?
                     <RouterLink
                         :to="{ name: 'login' }"
-                        class="text-primary underline-offset-4 hover:underline"
+                        class="text-primary-strong underline-offset-4 hover:underline"
                         >Entrar</RouterLink
                     >
                 </p>

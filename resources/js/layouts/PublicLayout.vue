@@ -2,6 +2,7 @@
 /** Layout das páginas públicas (home, como funciona). */
 import AppLogo from '@/components/app/AppLogo.vue';
 import SkipLink from '@/components/app/SkipLink.vue';
+import ThemeToggle from '@/components/app/ThemeToggle.vue';
 import { Button } from '@/components/ui/button';
 import { useAuthStore } from '@/stores/auth';
 
@@ -46,6 +47,7 @@ const auth = useAuthStore();
                             ></Button
                         >
                     </template>
+                    <ThemeToggle class="ml-1 sm:ml-2" />
                 </nav>
             </div>
         </header>

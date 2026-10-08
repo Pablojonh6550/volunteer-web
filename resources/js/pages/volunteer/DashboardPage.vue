@@ -70,7 +70,7 @@ const s = computed(() => stats.data.value);
             localização para ver oportunidades próximas.
             <RouterLink
                 :to="{ name: 'volunteer.profile' }"
-                class="text-primary font-medium underline"
+                class="text-primary-strong font-medium underline"
                 >Completar perfil</RouterLink
             >
         </AlertDescription>
